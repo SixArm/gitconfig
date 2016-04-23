@@ -4,7 +4,7 @@ Git configuration files.
 
 This has git aliases, branches, merges, syntax coloring, merges, credentials, and more.
 
-Example shortcuts:
+Example alias shortcuts:
 
     a = add
     b = branch
@@ -20,14 +20,15 @@ Example shortcuts:
     s = status
     w = whatchanged
 
-Example
+Example alias concepts:
 
   * Workflows such as `git rbi` to do a rebase interactively on unpushed commits.
   * Improvements such as `git optimize` to prune and repack, using the best settings.
-  * Visualizations such as `git graphviz` to show pretty logs and charts.
+  * Visualizations such as `git graphviz` to show logs and charts using third-party tools.
+
+See below for more examples.
 
 For the complete list, see the files in the `gitconfig.d` directory.
-
 
 ## Install
 
