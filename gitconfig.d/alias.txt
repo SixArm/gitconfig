@@ -1,70 +1,17 @@
 [alias]
 
-  # For help on git aliases:
-  #
-  #   * <https://git.wiki.kernel.org/index.php/Aliases>
-  #   * <http://stackoverflow.com/questions/267761/what-does-your-gitconfig-contain>
-  #   * <http://superuser.com/questions/169695/what-are-your-favorite-git-aliases>
-  #   * <http://stackoverflow.com/questions/1309430/how-to-embed-bash-script-directly-inside-a-git-alias>
-  #   * <http://code.joejag.com/2013/everyday-git-aliases/>
-  #   * <http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/>
-  #   * <https://ochronus.com/git-tips-from-the-trenches/>
-  #   * <http://mislav.uniqpath.com/2010/07/git-tips/>
-  #
-  # Thanks:
-  #
-  #   * [Joel Parker Henderson](http://joelparkerhenderson.com)
-  #   * [Scott Lindsay](http://stackoverflow.com/users/167384/scott-lindsay)
-  #   * [baudtack](http://baudtack.com)
-  #   * [Ruben Verborgh](http://ruben.verborgh.org)
-  #   * [Rob Kennedy](http://cs.wisc.edu/~rkennedy)
-  #   * [Corey Haines](http://coreyhaines.com/)
-  #   * [Mislav Marohnić](http://mislav.uniqpath.com/)
-  #   * [Gary Bernhardt](http://destroyallsoftware.com)
-  #   * [CodeGnome](http://stackoverflow.com/users/1301972/codegnome)
-  #   * [Rob Miller](https://github.com/robmiller)
-
-  ##
-  # One-letter aliases
-  ##
-
-  # add - record file contents to the index.
   a = add
-
-  # branch - list, create, or delete branches.
   b = branch
-
-  # commit - record changes to the repostiory.
   c = commit
-
-  # diff - show changes between commits, commit and working tree, etc.
   d = diff
-
-  # fetch - download objects and refs from another repository.
   f = fetch
-
-  # grep - print lines matching a pattern.
   g = grep
-
-  # log - show commit logs.
   l = log
-
-  # merge - join two or more development histories together.
   m = merge
-
-  # checkout - update the working tree to match a branch or paths; we use "o" to mean "out".
   o = checkout
-
-  # pull - fetch from and merge with another repository or a local branch.
   p = pull
-
-  # remote - manage set of tracked repositories.
   r = remote
-
-  # status - show the working tree differences. (Expert users may prefer: status -sb)
   s = status
-
-  # whatchanged - show logs with the differences introduced by each commit.
   w = whatchanged
 
   ##
@@ -74,14 +21,14 @@
   # developers use whichever alias they prefer.
   ##
 
-  # add just the files in the local directory that are updated.
-  au = add --update .
-
   # add by patch then commit - looks at each change, and asks if we want to put it in the repo, then commits.
   ac = !"git add --patch; git commit"
 
   # add by patch - looks at each change, and asks if we want to put it in the repo.
   ap = add --patch
+
+  # add just the files that are updated.
+  au = add --update
 
   # branch - edit the description
   be = branch --edit-description
