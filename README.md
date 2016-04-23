@@ -4,18 +4,40 @@ Git configuration files.
 
 This has git aliases, branches, merges, syntax coloring, merges, credentials, and more.
 
-Examples:
+Example shortcuts:
 
-  * Nicknames such as `git s` doing `git status`
-  * Workflows such as `git rbi` doing a rebase, interactively, on unpushed commits.
-  * Helpers such as `git optimize` doing a prune and repack.
-  
+    a = add
+    b = branch
+    c = commit
+    d = diff
+    f = fetch
+    g = grep
+    l = log
+    m = merge
+    o = checkout
+    p = pull
+    r = remote
+    s = status
+    w = whatchanged
+
+Example
+
+  * Workflows such as `git rbi` to do a rebase interactively on unpushed commits.
+  * Improvements such as `git optimize` to prune and repack, using the best settings.
+  * Visualizations such as `git graphviz` to show pretty logs and charts.
+
 For the complete list, see the files in the `gitconfig.d` directory.
 
 
 ## Install
 
-Install for novices:
+Install for novice users:
+
+  1. See the files in the `gitconfig.d` directory.
+
+  2. You can copy/paste anything that you like into your own `.gitconfig` file.
+
+Install for intermediate users:
 
   1. Get these files:
 
@@ -30,7 +52,7 @@ Install for novices:
         [include]
            path = sixarm_git_gitconfig/gitconfg
 
-Install for experts:
+Install for expert users:
 
   1. If you want full control, then you can copy any of these files and edit them as you like.
 
@@ -76,11 +98,20 @@ One letter shortcuts are for fast typing:
 There are many two letter shortcuts for popular commands and options, such as these:
 
     ap = add --patch
+    au = add --update
     be = branch --edit-description
+    ca = commit --amend
     ci = commit --interactive
+    cm = commit --message
+    dc = diff --cached
     ds = diff --staged
+    dw = diff --word-diff
     lg = log --graph
-	ss = status --short
+    lo = log --oneline
+    lp = log --patch
+    lt = log --topo-order
+    pr = pull --rebase
+    ss = status --short
 
 To see the complete list, please see the files in the `gitconfig.d` directory.
 
