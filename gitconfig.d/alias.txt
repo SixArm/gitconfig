@@ -600,3 +600,64 @@
   #   $ git graphviz HEAD~100..HEAD~60 | dotty /dev/stdin
   #   $ git graphviz --first-parent master | dotty /dev/stdin
   graphviz = !"f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+
+  ##
+  # Git aliases suitable for topic branches.
+  #
+  # These aliases are simple starting points for a simple topic flow.
+  # Some people like to use a topic branch for a new feature, or a
+  # hotfix patch, or refactoring work, or some spike research, etc.
+  # Adjust these as you like, to suit your project and/or team.
+  ##
+
+  ##
+  # Create a new topic branch:
+  #
+  #   1. Update the master branch
+  #   2. Create a new branch with your topic name and based on the master branch
+  #
+  # Example:
+  #
+  #     git topic-start my-idea-here
+  #
+  # If you use any kind of testing framework, or test driven development,
+  # the it is wise to test your topic immediately after running this,
+  # to ensure that your branch starts with all the tests succeeding.
+  ##
+
+  topic-start = "!f(){ branch=$1; git checkout master; git pull; git checkout -b "$branch" master; };f"
+
+  ##
+  # Update the topic branch:
+  #
+  #   1. Update the master branch
+  #   2. Update the topic branch with any changes from the master branch
+  #
+  # Example:
+  #
+  #     git topic-update
+  #
+  # If you use any kind of testing framework, or test driven development,
+  # the it is wise to test your topic immediately after running this,
+  # to ensure that any available updates are successfully integrated.
+  ##
+
+  topic-update = "!f(){ branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master; };f"
+
+  ##
+  # Push the topic branch:
+  #
+  #   1. Push the topic branch to the origin.
+  #   2. Set the upstream tracking.
+  #
+  # Example:
+  #
+  #     git topic-push
+  #
+  # If you use a sharing site such a GitHub, then this command
+  # will make your branch visible to your project collaborators.
+  # Many teams share branches before they are fully ready, to help
+  # the team provide feedback on the work-in-progress.
+  ##
+
+  topic-push = "!f(){ branch=$(git branch-name); git push -u origin "$branch"; };f"
