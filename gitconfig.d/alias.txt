@@ -1,28 +1,39 @@
 [alias]
 
+  ##
+  # One letter alias for our most frequent commands.
+  ##
+
   a = add
   b = branch
   c = commit
   d = diff
+  e =
   f = fetch
   g = grep
+  h =
+  i =
+  j =
+  k =
   l = log
   m = merge
+  n =
   o = checkout
   p = pull
+  q =
   r = remote
   s = status
+  t =
+  u =
+  v =
   w = whatchanged
+  x =
+  y =
+  z =
 
   ##
-  # Simple fairly-frequent aliases.
-  # Some of these duplicate the aliases above,
-  # which is intentional because this lets our
-  # developers use whichever alias they prefer.
+  # Short aliases for our frequent commands.
   ##
-
-  # add by patch then commit - looks at each change, and asks if we want to put it in the repo, then commits.
-  ac = !"git add --patch; git commit"
 
   # add by patch - looks at each change, and asks if we want to put it in the repo.
   ap = add --patch
@@ -31,21 +42,18 @@
   au = add --update
 
   # branch - edit the description
-  be = branch --edit-description
-
-  # branch - list, create, or delete branches [same as "b"]
-  br = branch
+  b-e = branch --edit-description
 
   # branch and only list branches whose tips are reachable from the specified commit (HEAD if not specified).
-  brm = branch --merged
+  bm = branch --merged
 
   # branch and only list branches whose tips are not reachable from the specified commit (HEAD if not specified).
-  brnm = branch --no-merged
+  bnm = branch --no-merged
 
   # commit - amend the tip of the current branch rather than creating a new commit.
   ca = commit --amend
 
-  # commit interacively
+  # commit interactive
   ci = commit --interactive
 
   # commit with a message
@@ -185,15 +193,17 @@
   # submodule - enables foreign repositories to be embedded within a dedicated subdirectory of the source tree.
   sm = submodule
 
-  # submodule with initialize, update, and recursive; this is useful to bring a submodule fully up to date.
-  smu = submodule update --init --recursive
+  # submodule update
+  smu = submodule update
+
+  # submodule update with initialize
+  smui = submodule update --init
+
+  # submodule update with initialize and recursive; this is useful to bring a submodule fully up to date.
+  smuir = submodule update --init --recursive
 
   # status - short summary instead of full details
   ss = status --short
-
-  # status - show the working tree differences [same as "s"]
-  st = status
-
 
   ### INSPECTION ALIASES ###
 
@@ -601,63 +611,102 @@
   #   $ git graphviz --first-parent master | dotty /dev/stdin
   graphviz = !"f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
-  ##
+  ##########################################################################
+  #
   # Git aliases suitable for topic branches.
   #
   # These aliases are simple starting points for a simple topic flow.
+  # Lots of people have lots of ideas about how to do various git flows.
+  #
   # Some people like to use a topic branch for a new feature, or a
   # hotfix patch, or refactoring work, or some spike research, etc.
   # Adjust these as you like, to suit your project and/or team.
   ##
 
   ##
-  # Create a new topic branch:
+  # Start a topic branch.
+  #
+  # Example:
+  #
+  #     git topic-start hello
+  #
+  # This implementatation does these steps:
   #
   #   1. Update the master branch
   #   2. Create a new branch with your topic name and based on the master branch
   #
-  # Example:
-  #
-  #     git topic-start my-idea-here
+  # Customize this for your own workflow preferences.
   #
   # If you use any kind of testing framework, or test driven development,
-  # the it is wise to test your topic immediately after running this,
+  # then it can be wise to test your topic immediately after running this,
   # to ensure that your branch starts with all the tests succeeding.
   ##
 
   topic-start = "!f(){ branch=$1; git checkout master; git pull; git checkout -b "$branch" master; };f"
 
   ##
-  # Update the topic branch:
+  # Update the current topic branch by pulling changes.
+  #
+  # Example:
+  #
+  #     git topic-pull
+  #
+  # This implementatation does these:
   #
   #   1. Update the master branch
   #   2. Update the topic branch with any changes from the master branch
   #
-  # Example:
-  #
-  #     git topic-update
+  # Customize this for your own workflow preferences.
   #
   # If you use any kind of testing framework, or test driven development,
-  # the it is wise to test your topic immediately after running this,
+  # then it can be wise to test your topic immediately after running this,
   # to ensure that any available updates are successfully integrated.
   ##
 
-  topic-update = "!f(){ branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master; };f"
+  topic-pull = "!f(){ branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master; };f"
 
   ##
-  # Push the topic branch:
-  #
-  #   1. Push the topic branch to the origin.
-  #   2. Set the upstream tracking.
+  # Update the current topic branch by pushing changes.
   #
   # Example:
   #
   #     git topic-push
   #
-  # If you use a sharing site such a GitHub, then this command
-  # will make your branch visible to your project collaborators.
+  # This implementatation does these:
+  #
+  #   1. Push the topic branch to the origin.
+  #   2. Set the upstream tracking.
+  #
+  # Customize this for your own workflow preferences.
+  #
+  # If you use a sharing site such a GitHub, and use typical settings,
+  # then this implementation makes your branch visible to collaborators.
+  #
   # Many teams share branches before they are fully ready, to help
   # the team provide feedback on the work-in-progress.
   ##
 
   topic-push = "!f(){ branch=$(git branch-name); git push -u origin "$branch"; };f"
+
+  ##
+  # Finish the current topic branch.
+  #
+  # Example:
+  #
+  #     git topic-finish
+  #
+  # This implementatation does these:
+  #
+  #   1. Delete the topic branch locally.
+  #   2. Delete the topic branch remotely.
+  #
+  # Customize this for your own workflow preferences.
+  #
+  # If you use a sharing site such a GitHub, and use typical settings,
+  # then this implementation deletes your branch for the site.
+  #
+  # Many teams choose to delete topic branches when they are finished,
+  # to keep the repositories clean and with a smaller number of branches.
+  ##
+
+  topic-finish = "!f(){ branch=$(git branch-name); git checkout master; git branch -d "$branch"; git push origin ":$branch"; };f"

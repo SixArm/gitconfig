@@ -169,23 +169,23 @@ Delete all branches that have been merged into master:
     master-cleanse = !"git checkout master && git branch --merged | xargs git branch -d; git branch -r --merged origin/master | sed 's/ *origin\///' | grep -v '^master$' | xargs -I% git push origin :% 2>&1 | grep --colour=never 'deleted'"
 
 
-## Feature Flow
+## Topic Flow
 
-Alias configuration for our feature flow. For details, see `gitconfig.d/alias-for-feature-flow.txt`.
+Alias configuration for our topic branches, like a simple git flow, or feature stories, or hotfixes, etc.
 
-Create a new feature branch:
+Create a new topic branch:
 
-    feature-start = '!branch=$1; git checkout master; git pull; git checkout -b "$branch" master'
+    topic-start = '!branch=$1; git checkout master; git pull; git checkout -b "$branch" master'
 
-Update the feature branch:
+Update the topic branch:
 
-    feature-update = '!branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master'
+    topic-update = '!branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master'
 
-Share the feature branch:
+Share the topic branch:
 
-    feature-share = '!branch=$(git branch-name); git push -u origin "$branch"'
+    topic-share = '!branch=$(git branch-name); git push -u origin "$branch"'
 
-If your team uses a different feature flow, you may want to skip including these aliases, or you may want to edit these aliases to match your team's feature flow.
+If your team uses a different topic flow, you may want to skip including these aliases, or you may want to edit these aliases to match your team's topic flow.
 
 
 ## User personalization
