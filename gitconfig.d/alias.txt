@@ -396,11 +396,11 @@
   unstage = reset HEAD
 
   # Reset aliases, akin to undo alias above
-  reset-hard = !git reset --hard
+  reset-hard = reset --hard
   reset-hard-clean = !git reset --hard && git clean -fd
-  reset-commit = !git reset --soft HEAD^
-  reset-add = !git reset HEAD
-  reset-stage = !git reset HEAD
+  reset-commit = reset --soft HEAD^
+  reset-add = reset HEAD
+  reset-stage = reset HEAD
 
   # Editing and adding conflicted files: when we get many merge conflicts
   # and want to quickly solve them using an editor, then add the  files.
@@ -707,6 +707,11 @@
   #
   # Many teams choose to delete topic branches when they are finished,
   # to keep the repositories clean and with a smaller number of branches.
+  #
+  # If git says "unable to push to unqualified destination" then it means
+  # that the remote branch doesn't exist, so git is unable to delete it.
+  # That's fine; it means someone else has already deleted the branch.
+  # To synchronize your branch list, use "git fetch --prune".
   ##
 
   topic-finish = "!f(){ branch=$(git branch-name); git checkout master; git branch -d "$branch"; git push origin ":$branch"; };f"
