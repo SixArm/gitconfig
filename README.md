@@ -4,37 +4,14 @@ Git configuration files.
 
 This has git aliases, branches, merges, syntax coloring, merges, credentials, and more.
 
-Example alias shortcuts:
+See the file `gitconfig.txt`.
 
-    a = add
-    b = branch
-    c = commit
-    d = diff
-    f = fetch
-    g = grep
-    l = log
-    m = merge
-    o = checkout
-    p = pull
-    r = remote
-    s = status
-    w = whatchanged
-
-Example alias concepts:
-
-  * Workflows such as `git rbi` to do a rebase interactively on unpushed commits.
-  * Improvements such as `git optimize` to prune and repack, using the best settings.
-  * Visualizations such as `git graphviz` to show logs and charts using third-party tools.
-
-See below for more examples.
-
-For the complete list, see the files in the `gitconfig.d` directory.
 
 ## Install
 
 Install for novice users:
 
-  1. See the files in the `gitconfig.d` directory.
+  1. See the file `gitconfig.txt`
 
   2. You can copy/paste anything that you like into your own `.gitconfig` file.
 
@@ -42,7 +19,7 @@ Install for intermediate users:
 
   1. Get these files:
 
-        git clone https://github.com/SixArm/sixarm_git_gitconfig.git
+        git clone https://github.com/SixArm/gitconfig.git
 
   2. Create your own personal `.gitconfig` file, or edit your existing file, such as:
 
@@ -51,141 +28,19 @@ Install for intermediate users:
   3. Add these lines:
 
         [include]
-           path = sixarm_git_gitconfig/gitconfg
-
-Install for expert users:
-
-  1. If you want full control, then you can copy any of these files and edit them as you like.
-
-  2. The `alias.txt` file has the bulk of the items - start with that file.
-
-  3. If you want to include some files, but not others, then you can use this syntax:
-
-        [include]
-           path = sixarm_git_gitconfig/gitconfig.d/alias.txt
-           path = sixarm_git_gitconfig/gitconfig.d/color.txt
+           path = gitconfg.txt
 
 Install for specific operating systems:
 
   1. If your system is OSX, and you want to enable the keychain credential manager, then add this:
 
         [include]
-           path = sixarm_git_gitconfig/gitconfig.d/specific-to-osx.txt
+           path = gitconfig-specific-to-osx.txt
 
   2. If your system is Windows, and you want to enable the system credential manager, then add this:
 
         [include]
-           path = sixarm_git_gitconfig/gitconfig.d/specific-to-windows.txt
-
-
-## Alias shortcuts
-
-One letter shortcuts are for fast typing:
-
-    a = add
-    b = branch
-    c = commit
-    d = diff
-    f = fetch
-    g = grep
-    l = log
-    m = merge
-    o = checkout
-    p = pull
-    r = remote
-    s = status
-    w = whatchanged
-
-There are many two letter shortcuts for popular commands and options, such as these:
-
-    ap = add --patch
-    au = add --update
-    be = branch --edit-description
-    ca = commit --amend
-    ci = commit --interactive
-    cm = commit --message
-    dc = diff --cached
-    ds = diff --staged
-    dw = diff --word-diff
-    lg = log --graph
-    lo = log --oneline
-    lp = log --patch
-    lt = log --topo-order
-    pr = pull --rebase
-    ss = status --short
-
-To see the complete list, please see the files in the `gitconfig.d` directory.
-
-
-## Favorites
-
-Here are some of our alias favorites that we use often:
-
-Get everything new:
-
-    get = !git pull --rebase && git submodule update --init --recursive
-
-Rebase interactive on our unpushed commits:
-
-    rbi = !git rebase --interactive @{u}
-
-Summarize changes for a daily standup meeting:
-
-    log-standup = !git log --since yesterday --pretty=short --author `git config user.email`
-
-Find text in any commit ever:
-
-    grep-all = !"git rev-list --all | xargs git grep '$1'"
-
-
-## Publishing
-
-Here are a couple our favorites for publishing. For the complete list, see `gitconfig.d/alias.txt`.
-
-Publish the current branch by pushing and tracking:
-
-    publish = "!git push -u origin $(git branch-name)"
-
-Unpublish the current branch by deleting the remote branch:
-
-    unpublish = "!git push origin :$(git branch-name)"
-
-
-
-## Cleaning
-
-Here are some of our favorites; for the complete list, see `gitconfig.d`.
-
-Prune stale items:
-
-    pruner = !git prune --expire=now; git reflog expire --expire-unreachable=now --rewrite --all
-
-Repack the way Linus recommends:
-
-    repacker = !git repack -a -d -f --depth=300 --window=300 --window-memory=1g
-
-Delete all branches that have been merged into master:
-
-    master-cleanse = !"git checkout master && git branch --merged | xargs git branch -d; git branch -r --merged origin/master | sed 's/ *origin\///' | grep -v '^master$' | xargs -I% git push origin :% 2>&1 | grep --colour=never 'deleted'"
-
-
-## Topic Flow
-
-Alias configuration for our topic branches, like a simple git flow, or feature stories, or hotfixes, etc.
-
-Create a new topic branch:
-
-    topic-start = '!branch=$1; git checkout master; git pull; git checkout -b "$branch" master'
-
-Update the topic branch:
-
-    topic-update = '!branch=$(git branch-name); git checkout master; git pull; git checkout "$branch"; git rebase master'
-
-Share the topic branch:
-
-    topic-share = '!branch=$(git branch-name); git push -u origin "$branch"'
-
-If your team uses a different topic flow, you may want to skip including these aliases, or you may want to edit these aliases to match your team's topic flow.
+           path = gitconfig-specific-to-windows.txt
 
 
 ## User personalization
@@ -208,14 +63,10 @@ If you use GitHub and the `github.txt` file, you will want to personalize it:
 
 ## Customization
 
-You can customize any of the file items by editing the file as you like.
-
-You can also customize any of the file items by adding your own item later in your own gitconfig file.
-
-For example you can include our aliases then customize "git l" with your own definition:
+Git makes it easy to do customization of someone else's file:
 
     [include]
-       path = ~/.gitconfig.d/alias.txt
+       path = ~/someone-elses-file.txt
 
     [alias]
        l = log --graph --oneline

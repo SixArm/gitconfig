@@ -1,3 +1,0 @@
-[github]
-  user = sixarm
-  token = sixarm-token

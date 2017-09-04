@@ -1,3 +1,0 @@
-[user]
-  email = alice@example.com
-  name = Alice Anderson
